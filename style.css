@@ -1,0 +1,17 @@
+body{
+background-color:#eff2f7;
+
+}
+
+#consigne{
+	padding :10px;
+}
+
+#pcontainer{ 
+background-color:#c5ccc8;
+	display:block;
+	border-style:solid;
+	border-color: black;
+	margin-left:20%;
+	margin-right:25%;
+}

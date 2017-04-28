@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css" type="text/css">
+<script type="text/javascript"  src="p5-zip/p5.js"></script>
+<script type="text/javascript" src="script/sketch.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="bootstrap/js/bootstrap.min.js" ></script>
+<script src="script/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+
+	<h1 class="h1 text-center">Reconnaissance de l'écriture</h1>
+	<br>
+<div class="container">
+	<h2>Consigne</h2>
+	<p  id="consigne" class="bg-primary text-left">
+	En vus de notre projet d'initiation à la recherche nous avon besoin de votre concours afin de tracer une lettre. 
+	Il est vous ici demander de tracer la lettre " b " en minuscule.
+
+	<br>Attention il est important de le faire dans le même sens d'écriture que décris ci-dessous.
+	<br> C'est à dire commencer par le haut puis continuer le tracé vers le bas et enfin terminer par la boucle.
+	<br> il ne vous est pas demandé d'effectuer exactement le même tracé. 
+	<br>Si votre lettre est un peu penchée d'un côté ou d'un autre ce n'est pas très grave
+	L'important est d'avoir le même sens de tracé pour la lettre.
+	<br><br>
+		<img class="img-thumbnail center-block" src="GIFPaint.gif">
+	</p>
+</div>
+<div class="container">
+<p class="bg-warning">Après avoir lus attentivement les consignes au-dessus</p>
+<h2>Exercice</h2>
+<p>Veuillez déssiner la lettre dans le cadre ci-dessous,
+si jamais vous commettez une erreur appuyez sur effacer. <br>
+Une fois que la lettre que vous avez déssiné vous convient veuillez sauvegarder</p>
+<ul class="list-inline ">
+<input  class="btn btn-primary" id="saveButton" type="button" value="Sauvegarder" onclick="view()">
+<input  class="btn btn-primary " id="eraseButton" type="button" value="Effacer" onclick="erase()">
+</ul>
+	<div id="pcontainer">
+	</div>
+</div>
+
+</body>
+
+</html>
