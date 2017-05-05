@@ -3,15 +3,60 @@ background-color:#eff2f7;
 
 }
 
-#consigne{
+.consigne{
 	padding :10px;
 }
 
-#pcontainer{ 
+ul.menu{
+  vertical-align: top;
+  display: inline-block;
+  list-style: none;
+}
+
+ul.menu li.menu{
+  display: block;
+  margin-top: 15%;
+  align-content: center;
+}
+
+div.bg-danger{
+    border-radius: 15px;
+}
+img#menuImg{
+  width:150px;
+}
+
+div.bg-info{
+  border-radius: 15px;
+  height:700px;
+}
+
+p.bg-primary{
+  border-radius: 15px;
+}
+
+#pcontainer{
+  margin-top:2%;
+  display: inline-block;
+  margin-left:3%;
+}
+#pcontainer canvas{ 
+  display: inline-block;
 background-color:#c5ccc8;
-	display:block;
 	border-style:solid;
 	border-color: black;
-	margin-left:20%;
-	margin-right:25%;
 }
+
+
+  #progressbar {
+    margin-top: 20px;
+  }
+ 
+  .progress-label {
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
+ 
+  .ui-dialog-titlebar-close {
+    display: none;
+  }

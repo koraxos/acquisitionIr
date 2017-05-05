@@ -1,52 +1,80 @@
+</ul>
+</ul>
 <html>
 <head>
-<meta charset="utf-8">
+	<meta charset="utf-8">
 	<link rel="stylesheet" href="style.css" type="text/css">
-<script type="text/javascript"  src="p5-zip/p5.js"></script>
-<script type="text/javascript" src="script/sketch.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" href="jquery-ui/jquery-ui.theme.min.css">
+	<link rel="stylesheet" href="jquery-ui/jquery-ui.structure.min.css">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" crossorigin="anonymous">
+	<script src="script/jquery-3.2.1.min.js"></script>
+	<script src="jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript"  src="p5-zip/p5.min.js"></script>
+	<script type="text/javascript" src="script/sketch.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="bootstrap/js/bootstrap.min.js" ></script>
-<script src="script/jquery-3.2.1.min.js"></script>
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="bootstrap/js/bootstrap.min.js" ></script>
 </head>
 <body>
 
 	<h1 class="h1 text-center">Reconnaissance de l'écriture</h1>
 	<br>
-<div class="container">
-	<h2>Consigne</h2>
-	<p  id="consigne" class="bg-primary text-left">
-	En vus de notre projet d'initiation à la recherche nous avon besoin de votre concours afin de tracer une lettre. 
-	Il est vous ici demander de tracer la lettre " b " en minuscule.
-
-	<br>Attention il est important de le faire dans le même sens d'écriture que décris ci-dessous.
-	<br> C'est à dire commencer par le haut puis continuer le tracé vers le bas et enfin terminer par la boucle.
-	<br> il ne vous est pas demandé d'effectuer exactement le même tracé. 
-	<br>Si votre lettre est un peu penchée d'un côté ou d'un autre ce n'est pas très grave
-	L'important est d'avoir le même sens de tracé pour la lettre.
-	<br><br>
-		<img class="img-thumbnail center-block" src="GIFPaint.gif">
-	</p>
-</div>
-<div class="container">
-<p class="bg-warning">Après avoir lus attentivement les consignes au-dessus</p>
-<h2>Exercice</h2>
-<p>Veuillez déssiner la lettre dans le cadre ci-dessous,
-si jamais vous commettez une erreur appuyez sur effacer. <br>
-Une fois que la lettre que vous avez déssiné vous convient veuillez sauvegarder</p>
-<ul class="list-inline ">
-<input  class="btn btn-primary" id="saveButton" type="button" value="Sauvegarder" onclick="view()">
-<input  class="btn btn-primary " id="eraseButton" type="button" value="Effacer" onclick="erase()">
-</ul>
-	<div id="pcontainer">
+	<div class="container">
+		<p class="bg-primary text-left consigne">
+			Bonjour !
+			Nous sommes des étudiants en Master Informatique à l'Université de Lorraine.<br>
+			Dans le cadre de notre formation, nous réalisons un projet d'Initiation à la Recherche et nous avons décidé de nous attaquer à de la reconnaissance automatique de l'écriture manuscrite.<br>
+			C'est un sujet qui nous a tout de suite paru passionnant et nous nous sommes intéressés à plusieurs méthodes d'analyse pour y arriver.<br>Les méthodes classiques ne sont pas très adaptées à ce genre de problème et nous avons donc décidé d'utiliser d'autres méthodes de Fouille de Données, en particulier les Machines à Vecteurs de Support (SVM en anglais).<br>
+			Pour être en mesure d'apprendre à notre SVM à reconnaître de l'écriture manuscrite, nous avons besoin d'un certain nombre d'échantillons de lettres. Ce besoin est la raison d'être de ce site.
+		</p>
+	</div>	
+	<div class="container">
+		<h2>Consignes</h2>
+		<p  class="bg-primary text-left consigne">
+			Dans l'animation ci-dessous, vous verrez le tracé d'une lettre. Il vous est demandé de dessiner avec votre souris cette lettre de la manière indiquée dans le cadre prévu à cet effet.
+			<img class="img-thumbnail center-block" >
+			<!--<img id="gifB" class="img-thumbnail center-block" src="GIFPaint.gif">
+			<img id="gifC" class="img-thumbnail center-block" src="GIFPaint.gif">
+			<img id="gifD" class="img-thumbnail center-block" src="GIFPaint.gif">-->
+		</p>
 	</div>
-</div>
+	<div class="container">
+		<p class="bg-warning">Après avoir lu attentivement les consignes ci-dessus</p>
+		<h2>Exercice</h2>
+		<p>
+			<h3>C'est à vous !</h3>
+			Une fois la lettre tracée, vous pouvez valider en appuyant sur "Sauvegarder" ou recommencer en appuyant sur "Effacer".<br>
+			Après avoir cliqué sur "Sauvegarder", une nouvelle lettre est chargée sur la page et vous pouvez alors la tracer à son tour.<br> Lorsque vous souhaitez arrêter l'expérience, il vous suffit de quitter la page.<br>
+			<br>
+			Merci de votre contribution !
+		</p>
+		<div class="bg-danger menu text-center">  Parfois le gif peut ne plus charger. Si cela arrive recharger la page pour re-bénéficier d'un exemple de dessin</div>
+		<div class="bg-info">
+			<ul class="menu .col-md-1" >
+				<!--<li><input  class="btn btn-primary" id="saveButton" type="button" value="Sauvegarder" onclick="view()"></li>-->
+				<li  class="btn btn-primary btn menu" id="downloadButton" onclick="view()">
+					<div id="dialog" title="Envoi du Fichier">
+						<div class="progress-label">Sauvegarde en cours...</div>
+						<div id="progressbar"></div>
+					</div>
+					Sauvegarder
+				</li>
+					<li  class="btn btn-primary btn menu" onclick="effacer()"">Effacer</li>
+					
+					<li class="menu">
+					<img id="menuImg" class="img-thumbnail center-block" >
+					</li>
+				</ul>
+				<div id="pcontainer">
+				</div>
+		</div>
+	</div>
+	</body>
 
-</body>
-
-</html>
+	</html>

@@ -4,11 +4,9 @@ function point(temps,coordX,coordY){
 	this.coordY=coordY;
 }
 
-var tableauPoints=[];
-
 var sketch=function(p){
 		p.setup=function(){
-			p.createCanvas(800,600);
+			p.resizeCanvas(800,600);
 		};
 
 		p.draw=function(){
@@ -19,89 +17,145 @@ var sketch=function(p){
 			}
 		};
 }
-
 var myp5=new p5(sketch,'pcontainer');
-
 var acquisiton=function(temps,coordX,coordY){
+
 	var p =new point();
 	p.constructor(temps,coordX,coordY);
-	/*p.t=new Number(temps);
-	p.x=new Number(coordX);
-	p.y=new Number(coordY);*/
 
-
-	/*var p = new point(temps,coordX,coordY);*/
 	tableauPoints.push(p);
 }
 
 function view(){
 
-	console.log(tableauPoints);
 	var finalArray= []
 	tableauPoints.forEach(function(element){
-		if(element.coordX>=0&&element.coordY>=0){
-			finalArray.push(element);
+
+		if((element.coordX>=0&&element.coordX<=800)&&(element.coordY>=0&&element.coordY<=600)){
+      element.t=element.t.toString().slice(0,9);
+      element.coordX=element.coordX.toString().slice(0,7);
+			element.coordY=element.coordY.toString().slice(0,7);
+      finalArray.push(element);
 		}
-
-
 	});
 	
-	console.log(finalArray);
+  /*console.log(finalArray);*/
+	/*console.log(choice);*/
 
 	$.ajax({
     type: "POST",
     url: "./script/inserFile.php",
-    data: {'mydata' :JSON.stringify(finalArray)},
+    data: {'mydata' :JSON.stringify(finalArray),'dataType':choice},
     cache: false
   });
 
-/*
-Parameters
-path 	String:
+};	
 
-name of the file or url to load
-[datatype] 	String:
-
-"json", "jsonp", "xml", or "text"
-[data] 	Object:
-
-param data passed sent with request
-[callback] 	Function:
-
-function to be executed after httpGet() completes, data is passed in as first argument
-[errorCallback] 	Function:
-
-function to be executed if there is an error, response is passed in as first argument*/	
-
-//save(myJSON, 'my.json');  
-//myp5.save(tableauPoints,'my.json');
-}
-
-function erase(){
+function effacer(){
 myp5.remove();
 myp5=new p5(sketch,'pcontainer');
 tableauPoints=[];
 }
-/*
 
-u842927745_bdd
-user u842927745_oli
-mp bdd tutFhqaf8mZ*/
-/*
-Si on ne fait as de calcul de courbure.
-Normaliser le temps  en commencant à 0.
-Normaliser les coordonnées dans une fenètre avant d'enreigstrer
+var tableauPoints=[];
+var choices=["A","B","C","D"];
+var choice="";
 
-pour normaliser les points.
+function randomChoice(){
+	return choice=choices[Math.floor(Math.random() * choices.length)];
+}
 
-on a un centre bas-gauche (0,0) et on veut que le coin haut droit soit (1,1)
+$(document).ready(function() {
+
+	/*randomize();*/
+
+	$("img.img-thumbnail").attr({src:"GIFPaint"+randomChoice()+".gif"});
 
 
-tester de réafficher
- les points en chargant le fichier 
- pour voir si le logiciel d'acquisiton fonctionne bien
- Ou redéssiner la lettre
+var progressTimer;
+var progressbar = $("div#progressbar");
+var progressLabel = $("div.progress-label");
+var dialogButtons = [{
+		"class":"btn btn-primary",
+        text: "Fermer",
+        disabled:true,
+        click: closeDownload
+      }];
 
-ANN
- lien cs.stanford.edu/people/karpathy/convnetjs
-*/
+      dialog = $( "#dialog" ).dialog({
+        autoOpen: false,
+        closeOnEscape: false,
+        show: { effect: "blind", duration: 800 },
+        resizable: false,
+        modal:true,
+        position:{
+		my: "top-100%",
+  		at: "center",
+  		of: "#pcontainer"
+        },
+        buttons: dialogButtons,
+        open: function() {
+          progressTimer = setTimeout( progress, 2000 );
+        },
+      });
+
+      downloadButton = $( "#downloadButton" )
+        .button()
+        .on( "click", function() {
+          $( this ).button( "option", {
+            disabled: true,
+            label: "Downloading..."
+          });
+          dialog.dialog( "open" );
+        });
+ 
+    progressbar.progressbar({
+      value: false,
+      change: function() {
+        progressLabel.text( "Progression :" + progressbar.progressbar( "value" ) + "%" );
+      },
+      complete: function() {
+        progressLabel.text( "Fini!" );
+        dialog.dialog( "option", "buttons", [{
+         "class":"btn btn-primary",
+        text: "Fermer",
+        disabled:false,
+        click: closeDownload
+        }]);
+        $(".ui-dialog button").last().trigger( "focus" );
+      }
+    });
+
+    function progress() {
+      var val = progressbar.progressbar( "value" ) || 0;
+ 
+      progressbar.progressbar( "value", val + Math.floor( Math.random() * 3 ) );
+ 
+      if ( val <= 99 ) {
+        progressTimer = setTimeout( progress, 50 );
+      }
+    }
+ 
+    function closeDownload() {
+      clearTimeout( progressTimer );
+      dialog
+        .dialog( "option", "buttons", dialogButtons )
+        .dialog( "close" );
+      progressbar.progressbar( "value", false );
+      progressLabel
+        .text( "" );
+      downloadButton.trigger( "focus" );
+      effacer();
+	};   
+
+	$("li#downloadButton").on("click",function(event){
+	choice=randomChoice();
+	/*console.log(choice);*/
+
+	$("img.img-thumbnail").attr({src:"GIFPaint"+choice+".gif"});
+});
+
+});	
+
+
+
